@@ -74,10 +74,10 @@ class InstagramUnfollower:
     def compare_following_and_followers(self, followers, followings): # this function compare the list of followers and followings, and create a blacklist which will include the list of users who we want to unfollow.
         followers = set(self.follower_accounts)
         followings = set(self.following_accounts)
-        for following in followings:
-            if follwing not in followers:
-                self._blacklist.append(following)
-
+        targetusers = followings - followers
+        for acc in targetusers:
+            self._blacklist.append(acc)
+            
     def find_target_users(self): #method to find users who we follow but they don't follow us back
         driver = self.driver
         driver.get("https://www.instagram.com/" + self._username + "/")
