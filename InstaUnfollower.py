@@ -72,16 +72,11 @@ class InstagramUnfollower:
         driver.find_element_by_xpath("//span[@class='glyphsSpriteX__outline__24__grey_9 u-__7']").click() #closes the follower window
 
     def compare_following_and_followers(self, followers, followings): # this function compare the list of followers and followings, and create a blacklist which will include the list of users who we want to unfollow.
-        followers = self.follower_accounts
-        followings = self.following_accounts
+        followers = set(self.follower_accounts)
+        followings = set(self.following_accounts)
         for following in followings:
-            dont_touch_this_following = False
-            for follower in followers:
-                if str(follower) == str(following):
-                    dont_touch_this_following = True
-            if dont_touch_this_following == False:
-                    self._blacklist.append(following)
-
+            if follwing not in followers:
+                self._blacklist.append(following)
 
     def find_target_users(self): #method to find users who we follow but they don't follow us back
         driver = self.driver
